@@ -1,0 +1,196 @@
+@charset "utf-8";
+
+$color-main: #32353c;
+$color-accent: #b79b6c;
+$color-bg: #f4f4f4;
+
+$breakpoints: (
+    "sm": "screen and (min-width: 400px)",
+    "md": "screen and (min-width: 800px)",
+    "lg": "screen and (min-width: 1000px)",
+    "xl": "screen and (min-width: 1200px)",
+    ) !default;
+
+@mixin mq($breakpoint) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+@mixin inner($w: (800/900)*100%, $mw: 1200px) {
+    width: $w;
+    max-width: $mw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin flex($a: center, $j: space-between) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $j;
+    align-items: $a;
+}
+
+html {
+    font-size: (14/16)+em;
+    //font-size: (14/16em);
+
+    @include mq(md) {
+        font-size: (16/16)+em;
+    }
+}
+
+body {
+    color: $color-main;
+    font-family: Helvetica,
+        Arial,
+        sans-serif;
+    line-height: (24/14
+    );
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.header {
+    padding: 32px 0;
+    background-color: rgba(255, 255, 255, .8);
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+
+    &__inner {
+        @include inner();
+        @include flex();
+    }
+}
+
+.gnav {
+    &__list {
+        @include flex();
+    }
+
+    &__item {
+        margin-left: 32px;
+    }
+
+    &__link {
+        color: $color-main;
+        font-size: (16/14)+rem;
+        font-weight: bold;
+        transition: .3s;
+
+        @include mq(md) {
+            font-size: (16/16)+rem;
+        }
+
+        &--current,
+        &:hover {
+            color: $color-accent;
+        }
+    }
+}
+
+.visual {
+    margin-bottom: (84/14)+em;
+
+    &__pic {
+        width: 100%;
+        height: clamp(600px, 75vw, 800px);
+        object-fit: cover;
+    }
+}
+
+.label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    background-color: $color-accent;
+}
+
+.btn {}
+
+.unit {}
+
+
+.card {
+    &__pic {
+        aspect-ratio: 370/492;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.clothes {
+    &__header {
+        @include inner();
+    }
+
+    &__body {
+        padding: (84/14)+em 0;
+        background-color: $color-bg
+    }
+
+    &__list {
+        @include inner();
+        @include flex();
+        margin-bottom: -(56/14)+em;
+    }
+
+    &__item {
+        width: (370/800)*100%;
+        margin-bottom: (56/14)+em;
+
+        @include mq(md) {
+            width: (360/1200)*100%
+        }
+    }
+}
+
+/* about.html */
+.post {
+    &__inner {
+        @include inner();
+
+        @include mq(md) {
+            @include flex(stretch);
+        }
+    }
+
+    &__item {
+        margin-bottom: (56/14)+em;
+        padding: (112/14)+em (42/14)+em;
+        color: #fff;
+        @include flex();
+
+        @include mq(md) {
+            width: (560/1200)*100%;
+        }
+
+        &.item01 {
+            background: url(../images/bg_post02.png) no-repeat center/cover;
+        }
+
+        &.item02 {
+            background: url(../images/bg_post03.png) no-repeat center/cover;
+        }
+    }
+}
